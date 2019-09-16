@@ -9,7 +9,7 @@ export async function ocamlformat(session: Session, doc: LSP.TextDocument, range
     return null;
   }
   const text = doc.getText();
-  const ocamlformat = new processes.Ocamlformat(session, ["-"]).process;
+  const ocamlformat = new processes.Ocamlformat(session, ["--name", doc.uri, "-"]).process;
   ocamlformat.stdin.write(text);
   ocamlformat.stdin.end();
   const otxt = await new Promise<null | string>(resolve => {
